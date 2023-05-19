@@ -1,5 +1,5 @@
 import React from 'react';
-import { ReactComponent as LogoTrinca } from '../../assets/icons/trinca-icone.svg';
+import { ReactComponent as LogoTrinca } from '../../assets/icones/trinca-icone.svg';
 import styles from './PaginaLayoutWrapper.module.scss';
 
 type Props = {

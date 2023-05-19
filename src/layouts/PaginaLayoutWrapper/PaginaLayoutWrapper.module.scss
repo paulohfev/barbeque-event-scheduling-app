@@ -1,8 +1,10 @@
 .wrapper {
-  background-image: url('../../assets/images/tela-fundo-churrasco.png');
+  background-image: url('../../assets/imagens/tela-fundo-churrasco.png');
   background-repeat: no-repeat;
   background-size: 100% 203px;
   min-height: 100vh;
+  overflow: hidden;
+  padding: 0 24px;
   position: relative;
 }
 
