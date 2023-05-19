@@ -1,0 +1,30 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.botao-adicionar-churrasco {
+  align-items: center;
+  border: 0;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  height: 192px;
+  justify-content: center;
+  width: 282px;
+
+  .botao-icone-wrapper {
+    background-color: var(--amarelo-primario);
+    border-radius: 50%;
+    height: 90px;
+    margin-bottom: 8px;
+    padding: 23px;
+    width: 90px;
+  }
+
+  .botao-texto {
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 24.65px;
+  }
+}

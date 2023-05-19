@@ -1,0 +1,31 @@
+.wrapper {
+  background-image: url('../../assets/images/tela-fundo-churrasco.png');
+  background-repeat: no-repeat;
+  background-size: 100% 203px;
+  min-height: 100vh;
+  position: relative;
+}
+
+.hero {
+  padding: 70px 0 48px;
+
+  .hero-titulo {
+    font-size: 32px;
+    font-weight: 800;
+    line-height: 37.57px;
+    margin: 0;
+    text-align: center;
+  }
+}
+
+.main {
+  padding-bottom: 53px;
+}
+
+.footer {
+  bottom: 0;
+  margin: 33px 0 30px;
+  position: absolute;
+  text-align: center;
+  width: 100%;
+}
