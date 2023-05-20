@@ -1,9 +1,12 @@
-import React from 'react';
 import ReactDOM from 'react-dom/client';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import { routesConfig } from './router';
+import "react-datepicker/dist/react-datepicker.css";
 import './styles/index.css';
-import App from './App';
+
+const router = createBrowserRouter(routesConfig);
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
-root.render(<App />);
+root.render(<RouterProvider router={router} />);

@@ -1,4 +1,11 @@
 :root {
   --amarelo-primario: #FFD836;
+  --amarelo-secundario: #E5C231;
+
   --branco-primario: #ffffff;
+  --branco-secundario: #FAFAFA;
+
+  --preto-primario: #000000;
+
+  --vermelho-primario: red;
 }

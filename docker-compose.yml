@@ -7,8 +7,6 @@ services:
     build:
       context: .
       target: development
-      args:
-       - REACT_APP_API_URL=${REACT_APP_API_URL}
     volumes:
       - ./src:/app/src
     stdin_open: true
