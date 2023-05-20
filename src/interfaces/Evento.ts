@@ -1,7 +1,8 @@
 import { Participante } from "./Participante";
 
 export interface Evento {
+  id: string,
   data: string,
-  descricao: string,
+  titulo: string,
   participantes: Participante[],
 }

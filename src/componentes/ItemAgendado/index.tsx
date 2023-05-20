@@ -6,17 +6,17 @@ import styles from './ItemAgendado.module.scss';
 
 type Props = {
   data: string;
-  descricao: string;
+  titulo: string;
   numeroParticipantes: number;
   valorTotalParticipantes: number;
 }
 
-const ItemAgendado: React.FC<Props> = ({ data, descricao, numeroParticipantes, valorTotalParticipantes }) => {
+const ItemAgendado: React.FC<Props> = ({ data, titulo, numeroParticipantes, valorTotalParticipantes }) => {
   return (
     <div className={styles['wrapper']}>
       <div>
         <p className={styles['data']}>{formatarData(data)}</p>
-        <p className={styles['descricao']}>{descricao}</p>
+        <p className={styles['titulo']}>{titulo}</p>
       </div>
 
       <div className={styles['footer-item-agendado']}>

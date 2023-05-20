@@ -4,7 +4,8 @@ import { ReactComponent as IconeChurrasco } from '../../assets/icones/churrasco-
 import ItemAgendado from '../../componentes/ItemAgendado';
 import PaginaLayoutWrapper from '../../layouts/PaginaLayoutWrapper';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { obterEventos, selecionarEventos, adicionarEventos } from '../../store/slices/eventosSlice';
+import { obterEventos, selecionarEventos } from '../../store/slices/eventosSlice';
+import { formatarRotaSlug } from '../../utilidades/rotas';
 import styles from './PaginaChurrascoLista.module.scss';
 
 const PaginaChurrasLista: React.FC = () => {
@@ -25,13 +26,18 @@ const PaginaChurrasLista: React.FC = () => {
       }
 
       return (
-        <ItemAgendado
-          data={evento.data}
-          descricao={evento.descricao}
-          key={`${evento.descricao}-${index}`}
-          numeroParticipantes={numeroParticipantes}
-          valorTotalParticipantes={valorTotalParticipantes}
-        />
+        <Link
+          className={styles['evento-link']}
+          key={`${evento.titulo}-${index}`}
+          to={`/evento/${evento.id}`}
+        >
+          <ItemAgendado
+            data={evento.data}
+            titulo={evento.titulo}
+            numeroParticipantes={numeroParticipantes}
+            valorTotalParticipantes={valorTotalParticipantes}
+          />
+        </Link>
       )
     })
   }

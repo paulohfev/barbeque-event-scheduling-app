@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useId, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DatePicker from "react-datepicker";
 import classNames from 'classnames';
@@ -11,11 +11,12 @@ import styles from './PaginaCriarEvento.module.scss';
 
 const PaginaCriarEvento: React.FC = () => {
   const dispatch = useAppDispatch();
-  const [valorDescricao, setValorDescricao] = useState('');
+  const [valorTitutlo, setValorTitulo] = useState('');
   const [valorData, setValorData] = useState(new Date());
   const [valorParticipante, setValorParticipante] = useState('');
   const [valorDinheiroParticipante, setValorDinheiroParticipante] = useState('');
   const [participantes, setParticipantes] = useState<Participante[]>([]);
+  const idEvento = useId();
   const navigate = useNavigate();
 
   const adicionarItemLista = () => {
@@ -56,8 +57,9 @@ const PaginaCriarEvento: React.FC = () => {
   const enviarFormulario = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(adicionarEventos({
+      id: idEvento,
       data: valorData.toString(),
-      descricao: valorDescricao,
+      titulo: valorTitutlo,
       participantes: participantes,
     }));
     navigate('/');
@@ -70,13 +72,13 @@ const PaginaCriarEvento: React.FC = () => {
           <label className={styles['rotulo']}>Data</label>
           <DatePicker className={styles['campo']} selected={valorData} onChange={(data: Date) => setValorData(data)} />
 
-          <label className={styles['rotulo']}>Descrição</label>
+          <label className={styles['rotulo']}>Título</label>
           <input
             className={styles['campo']}
-            onChange={(e) => setValorDescricao(e.target.value)}
-            placeholder="Descrição"
+            onChange={(e) => setValorTitulo(e.target.value)}
+            placeholder="Título"
             type="text"
-            value={valorDescricao}
+            value={valorTitutlo}
           />
 
           <label className={styles['rotulo']}>Participantes</label>
