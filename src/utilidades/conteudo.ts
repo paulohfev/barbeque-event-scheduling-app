@@ -6,3 +6,13 @@ export const formatarParaMoeda = (valor: string) => {
   });
   return resultado.format(valorNumero);
 };
+
+export const formatarData = (data: string) => {
+  const d = new Date(data);
+  const dia = d.getDate();
+  const mes = d.getMonth();
+  const ano = d.getFullYear();
+  const novaData = `${dia}/${mes}/${ano}`;
+
+  return novaData;
+};

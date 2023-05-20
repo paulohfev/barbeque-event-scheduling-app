@@ -1,25 +1,33 @@
 import React from 'react';
 import { ReactComponent as IconeDinheiro } from '../../assets/icones/dinheiro-icone.svg';
 import { ReactComponent as IconeGrupo } from '../../assets/icones/grupo-icone.svg';
+import { formatarData, formatarParaMoeda } from '../../utilidades/conteudo';
 import styles from './ItemAgendado.module.scss';
 
-const ItemAgendado: React.FC = () => {
+type Props = {
+  data: string;
+  descricao: string;
+  numeroParticipantes: number;
+  valorTotalParticipantes: number;
+}
+
+const ItemAgendado: React.FC<Props> = ({ data, descricao, numeroParticipantes, valorTotalParticipantes }) => {
   return (
     <div className={styles['wrapper']}>
       <div>
-        <p className={styles['data']}>01/12</p>
-        <p className={styles['descricao']}>Lorem Ipsum</p>
+        <p className={styles['data']}>{formatarData(data)}</p>
+        <p className={styles['descricao']}>{descricao}</p>
       </div>
 
       <div className={styles['footer-item-agendado']}>
         <div className={styles['footer-grupo']}>
           <IconeGrupo />
-          <p className={styles['footer-texto']}>12</p>
+          <p className={styles['footer-texto']}>{numeroParticipantes}</p>
         </div>
 
         <div className={styles['footer-grupo']}>
           <IconeDinheiro />
-          <p className={styles['footer-texto']}>R$140</p>
+          <p className={styles['footer-texto']}>{formatarParaMoeda(valorTotalParticipantes.toString())}</p>
         </div>
       </div>
     </div>

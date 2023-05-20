@@ -12,13 +12,13 @@ export const eventosSlice = createSlice({
     obterEventos: (state, action: PayloadAction<Evento[]>) => {
       return action.payload;
     },
-    adicionarEvents: (state, action: PayloadAction<Evento>) => {
+    adicionarEventos: (state, action: PayloadAction<Evento>) => {
       return [...state, action.payload];
     }
   },
 });
 
-export const { obterEventos, adicionarEvents } = eventosSlice.actions;
+export const { obterEventos, adicionarEventos } = eventosSlice.actions;
 
 export const selecionarEventos = (state: RootState) => state.eventos;
 

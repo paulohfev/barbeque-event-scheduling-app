@@ -1,17 +1,22 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import DatePicker from "react-datepicker";
 import classNames from 'classnames';
 import PaginaLayoutWrapper from '../../layouts/PaginaLayoutWrapper';
 import { Participante } from '../../interfaces/Participante';
 import { formatarParaMoeda } from '../../utilidades/conteudo';
+import { useAppDispatch } from '../../store/hooks';
+import { adicionarEventos } from '../../store/slices/eventosSlice';
 import styles from './PaginaCriarEvento.module.scss';
 
 const PaginaCriarEvento: React.FC = () => {
+  const dispatch = useAppDispatch();
   const [valorDescricao, setValorDescricao] = useState('');
   const [valorData, setValorData] = useState(new Date());
   const [valorParticipante, setValorParticipante] = useState('');
   const [valorDinheiroParticipante, setValorDinheiroParticipante] = useState('');
   const [participantes, setParticipantes] = useState<Participante[]>([]);
+  const navigate = useNavigate();
 
   const adicionarItemLista = () => {
     const itemParticipante = {
@@ -50,6 +55,12 @@ const PaginaCriarEvento: React.FC = () => {
 
   const enviarFormulario = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    dispatch(adicionarEventos({
+      data: valorData.toString(),
+      descricao: valorDescricao,
+      participantes: participantes,
+    }));
+    navigate('/');
   };
 
   return (

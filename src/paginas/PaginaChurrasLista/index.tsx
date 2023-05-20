@@ -3,23 +3,43 @@ import { Link } from 'react-router-dom';
 import { ReactComponent as IconeChurrasco } from '../../assets/icones/churrasco-icone.svg';
 import ItemAgendado from '../../componentes/ItemAgendado';
 import PaginaLayoutWrapper from '../../layouts/PaginaLayoutWrapper';
-import styles from './PaginaChurrascoLista.module.scss';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { obterEventos, selecionarEventos } from '../../store/slices/eventosSlice';
+import { obterEventos, selecionarEventos, adicionarEventos } from '../../store/slices/eventosSlice';
+import styles from './PaginaChurrascoLista.module.scss';
 
 const PaginaChurrasLista: React.FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     dispatch(obterEventos)
-  }, []);
+  }, [dispatch]);
   const eventos = useAppSelector(selecionarEventos);
-  console.log(eventos)
+
+  const renderizarListaItensAgendados = () => {
+    return eventos.map((evento, index) => {
+      const numeroParticipantes = evento.participantes.length;
+      let valorTotalParticipantes = 0;
+
+      for (let i = 0; i < evento.participantes.length; i++) {
+        valorTotalParticipantes += Number(evento.participantes[i].valor);
+      }
+
+      return (
+        <ItemAgendado
+          data={evento.data}
+          descricao={evento.descricao}
+          key={`${evento.descricao}-${index}`}
+          numeroParticipantes={numeroParticipantes}
+          valorTotalParticipantes={valorTotalParticipantes}
+        />
+      )
+    })
+  }
 
   return (
     <PaginaLayoutWrapper>
       <div className={styles['container']}>
-        <ItemAgendado />
+        {renderizarListaItensAgendados()}
 
         <Link to="/criar-evento" className={styles['link']}>
           <button className={styles['botao-adicionar-churrasco']}>
