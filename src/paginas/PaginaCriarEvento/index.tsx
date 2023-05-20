@@ -2,20 +2,16 @@ import React, { useState } from 'react';
 import DatePicker from "react-datepicker";
 import classNames from 'classnames';
 import PaginaLayoutWrapper from '../../layouts/PaginaLayoutWrapper';
+import { Participante } from '../../interfaces/Participante';
 import { formatarParaMoeda } from '../../utilidades/conteudo';
 import styles from './PaginaCriarEvento.module.scss';
-
-type ItemParticipante = {
-  nome: string;
-  valor: string;
-}
 
 const PaginaCriarEvento: React.FC = () => {
   const [valorDescricao, setValorDescricao] = useState('');
   const [valorData, setValorData] = useState(new Date());
   const [valorParticipante, setValorParticipante] = useState('');
   const [valorDinheiroParticipante, setValorDinheiroParticipante] = useState('');
-  const [participantes, setParticipantes] = useState<ItemParticipante[]>([]);
+  const [participantes, setParticipantes] = useState<Participante[]>([]);
 
   const adicionarItemLista = () => {
     const itemParticipante = {
@@ -30,7 +26,7 @@ const PaginaCriarEvento: React.FC = () => {
 
   const removerItemLista = (id: number) => {
     const participantesFiltrados =
-      participantes.filter((part: ItemParticipante) => id !== participantes.indexOf(part));
+      participantes.filter((part: Participante) => id !== participantes.indexOf(part));
 
     setParticipantes(participantesFiltrados);
   };
