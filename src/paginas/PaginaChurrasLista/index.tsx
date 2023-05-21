@@ -4,7 +4,7 @@ import { Grid } from '@mui/material';
 import ItemAgendado from '../../componentes/ItemAgendado';
 import PaginaLayoutWrapper from '../../layouts/PaginaLayoutWrapper';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { obterEventos, selecionarEventos } from '../../store/slices/eventosSlice';
+import { obterEventos, removerEvento, selecionarEventos } from '../../store/slices/eventosSlice';
 import { ReactComponent as IconeChurrasco } from '../../assets/icones/churrasco-icone.svg';
 import styles from './PaginaChurrascoLista.module.scss';
 
@@ -12,7 +12,7 @@ const PaginaChurrasLista: React.FC = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(obterEventos)
+    dispatch(obterEventos);
   }, [dispatch]);
   const eventos = useAppSelector(selecionarEventos);
 
@@ -25,12 +25,21 @@ const PaginaChurrasLista: React.FC = () => {
         valorTotalParticipantes += Number(evento.participantes[i].valor);
       }
 
+      const deletarEvento = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, eventoId: string) => {
+        event.preventDefault();
+        event.stopPropagation();
+        dispatch(removerEvento(eventoId))
+      }
+
       return (
         <Grid item xs={12} md={4} lg={4} key={evento.id}>
           <Link
             className={styles['evento-link']}
             to={`/evento/${evento.id}`}
           >
+            <button className={styles['deletar-evento']} onClick={(event) => deletarEvento(event, evento.id)}>
+              Remover
+            </button>
             <ItemAgendado
               data={evento.data}
               titulo={evento.titulo}
