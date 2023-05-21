@@ -1,18 +1,19 @@
 import PaginaChurrasLista from "../paginas/PaginaChurrasLista";
 import PaginaCriarEvento from "../paginas/PaginaCriarEvento";
 import PaginaEvento from "../paginas/PaginaEvento";
+import { Rotas } from "../enums/rotas";
 
 export const routesConfig = [
   {
-    path: "/",
+    path: Rotas.root,
     element: <PaginaChurrasLista />,
   },
   {
-    path: "/criar-evento",
+    path: Rotas.criarEvento,
     element: <PaginaCriarEvento />,
   },
   {
-    path: "/evento/:id",
+    path: Rotas.evento,
     element: <PaginaEvento />
   }
 ];

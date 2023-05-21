@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DatePicker from "react-datepicker";
+import { Grid } from '@mui/material';
 import classNames from 'classnames';
 import { uniqueId } from 'lodash';
 import PaginaLayoutWrapper from '../../layouts/PaginaLayoutWrapper';
@@ -8,8 +9,8 @@ import { Participante } from '../../interfaces/Participante';
 import { formatarParaMoeda } from '../../utilidades/conteudo';
 import { useAppDispatch } from '../../store/hooks';
 import { adicionarEventos } from '../../store/slices/eventosSlice';
+import { Rotas } from '../../enums/rotas';
 import styles from './PaginaCriarEvento.module.scss';
-import { Grid } from '@mui/material';
 
 const PaginaCriarEvento: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -67,7 +68,7 @@ const PaginaCriarEvento: React.FC = () => {
       titulo: valorTitulo,
       participantes: participantes,
     }));
-    navigate('/');
+    navigate(Rotas.root);
   };
 
   return (
