@@ -1,5 +1,4 @@
 import React from 'react';
-import { ReactComponent as IconeDinheiro } from '../../assets/icones/dinheiro-icone.svg';
 import styles from './ContagemValorTotal.module.scss';
 
 type Props = {

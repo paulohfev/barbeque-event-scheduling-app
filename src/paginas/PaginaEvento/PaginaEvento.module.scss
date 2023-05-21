@@ -46,5 +46,41 @@
     .participante-item:not(:last-of-type) {
       margin-bottom: 10px;
     }
+
+    .container-participante-item-texto {
+      display: flex;
+    }
+
+    .confirmado {
+      text-decoration: line-through;
+    }
+  }
+}
+
+// campo checkbox customizado
+.campo-container {
+  position: relative;
+
+  .campo-participante {
+    height: 25px;
+    margin: 0 19px 0 0;
+    visibility: hidden;
+    width: 25px;
+  }
+
+  .campo-participante-final {
+    border: 1px solid var(--amarelo-terciario);
+    border-radius: 50%;
+    cursor: pointer;
+    display: block;
+    height: 25px;
+    position: absolute;
+    top: 0;
+    width: 25px;
+  }
+
+  .campo-participante:checked + .campo-participante-final {
+    background-color: var(--amarelo-primario);
+    border: 1px solid var(--amarelo-primario);
   }
 }

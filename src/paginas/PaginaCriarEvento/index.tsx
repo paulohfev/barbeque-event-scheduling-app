@@ -1,7 +1,8 @@
-import React, { useId, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DatePicker from "react-datepicker";
 import classNames from 'classnames';
+import { uniqueId } from 'lodash';
 import PaginaLayoutWrapper from '../../layouts/PaginaLayoutWrapper';
 import { Participante } from '../../interfaces/Participante';
 import { formatarParaMoeda } from '../../utilidades/conteudo';
@@ -16,13 +17,15 @@ const PaginaCriarEvento: React.FC = () => {
   const [valorParticipante, setValorParticipante] = useState('');
   const [valorDinheiroParticipante, setValorDinheiroParticipante] = useState('');
   const [participantes, setParticipantes] = useState<Participante[]>([]);
-  const idEvento = useId();
+
   const navigate = useNavigate();
 
   const adicionarItemLista = () => {
     const itemParticipante = {
+      id: uniqueId(),
       nome: valorParticipante,
       valor: valorDinheiroParticipante,
+      confirmado: false,
     };
   
     setParticipantes((prevState) => [...prevState, itemParticipante]);
@@ -40,7 +43,7 @@ const PaginaCriarEvento: React.FC = () => {
   const renderizarParticipantesAdicionados = () => {
     return participantes.map((participante, index) => {
       return (
-        <div className={styles['container-item-participante']} key={index}>
+        <div className={styles['container-item-participante']} key={participante.id}>
           <div className={styles['container-item-texto']}>
             <p className={styles['item-participante-texto']}>{participante.nome}</p>
             <p className={styles['item-participante-texto']}>{formatarParaMoeda(participante.valor)}</p>
@@ -57,7 +60,7 @@ const PaginaCriarEvento: React.FC = () => {
   const enviarFormulario = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     dispatch(adicionarEventos({
-      id: idEvento,
+      id: uniqueId(),
       data: valorData.toString(),
       titulo: valorTitutlo,
       participantes: participantes,

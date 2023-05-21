@@ -1,32 +1,28 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Grid } from '@mui/material';
 import ContagemValorTotal from '../../componentes/ContagemTotal';
 import PaginaLayoutWrapper from '../../layouts/PaginaLayoutWrapper';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { obterEventoPorId, selecionarEventos } from '../../store/slices/eventosSlice';
+import { selecionarEventos, atualizarParticipantesConfirmados } from '../../store/slices/eventosSlice';
+import { Evento } from '../../interfaces/Evento';
 import { formatarData, formatarParaMoeda } from '../../utilidades/conteudo';
 import { ReactComponent as IconeDinheiro } from '../../assets/icones/dinheiro-icone.svg';
 import { ReactComponent as IconeGrupo } from '../../assets/icones/grupo-icone.svg';
 import styles from './PaginaEvento.module.scss';
+import classNames from 'classnames';
 
 const PaginaEvento: React.FC = () => {
   const dispatch = useAppDispatch();
   const { id } = useParams();
+  const evento = useAppSelector(selecionarEventos).find((evento) => evento.id === id) as Evento;
 
-  useEffect(() => {
-    if (id) {
-      dispatch(obterEventoPorId(id));
-    }
-  }, [id]);
-  const evento = useAppSelector(selecionarEventos)[0];
-
-  const numeroParticipantes = evento.participantes.length;
+  const numeroParticipantes = evento?.participantes.length;
   const obterValorTotalParticipantes = () => {
     let valorTotalParticipantes = 0;
 
-    for (let i = 0; i < evento.participantes.length; i++) {
-      valorTotalParticipantes += Number(evento.participantes[i].valor);
+    for (let i = 0; i < evento?.participantes.length; i++) {
+      valorTotalParticipantes += Number(evento?.participantes[i].valor);
     }
 
     return formatarParaMoeda(valorTotalParticipantes.toString());
@@ -38,8 +34,24 @@ const PaginaEvento: React.FC = () => {
         {evento.participantes.map((participante, index) => {
           return (
             <li className={styles['participante-item']} key={`${participante.nome}-${index}`}>
-              <span>{participante.nome}</span>
-              <span>{formatarParaMoeda(participante.valor)}</span>
+              <div className={styles['container-participante-item-texto']}>
+                <div className={styles['campo-container']}>
+                  <input
+                    className={styles['campo-participante']}
+                    checked={participante.confirmado}
+                    onChange={() => id && dispatch(atualizarParticipantesConfirmados({ eventoId: id, participante: participante }))}
+                    id="campo-participante"
+                    type="checkbox"
+                  />
+                  <label className={styles['campo-participante-final']} htmlFor="campo-participante" />
+                </div>
+
+                <span>{participante.nome}</span>
+              </div>
+
+              <span className={classNames({ [styles['confirmado']]: participante.confirmado })}>
+                {formatarParaMoeda(participante.valor)}
+              </span>
             </li>
           );
         })}
