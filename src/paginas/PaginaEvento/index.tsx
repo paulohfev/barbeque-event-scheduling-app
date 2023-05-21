@@ -1,5 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import classNames from 'classnames';
 import { Grid } from '@mui/material';
 import ContagemValorTotal from '../../componentes/ContagemTotal';
 import PaginaLayoutWrapper from '../../layouts/PaginaLayoutWrapper';
@@ -10,12 +11,11 @@ import { formatarData, formatarParaMoeda } from '../../utilidades/conteudo';
 import { ReactComponent as IconeDinheiro } from '../../assets/icones/dinheiro-icone.svg';
 import { ReactComponent as IconeGrupo } from '../../assets/icones/grupo-icone.svg';
 import styles from './PaginaEvento.module.scss';
-import classNames from 'classnames';
 
 const PaginaEvento: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { id } = useParams();
-  const evento = useAppSelector(selecionarEventos).find((evento) => evento.id === id) as Evento;
+  const { id: eventoId } = useParams();
+  const evento = useAppSelector(selecionarEventos).find((evento) => evento.id === eventoId) as Evento;
 
   const numeroParticipantes = evento?.participantes.length;
   const obterValorTotalParticipantes = () => {
@@ -31,19 +31,29 @@ const PaginaEvento: React.FC = () => {
   const renderizarListaParticipantes = () => {
     return (
       <ul className={styles['lista-participantes']}>
-        {evento.participantes.map((participante, index) => {
+        {evento.participantes.map((participante) => {
           return (
-            <li className={styles['participante-item']} key={`${participante.nome}-${index}`}>
+            <li className={styles['participante-item']} key={participante.id}>
               <div className={styles['container-participante-item-texto']}>
                 <div className={styles['campo-container']}>
                   <input
                     className={styles['campo-participante']}
                     checked={participante.confirmado}
-                    onChange={() => id && dispatch(atualizarParticipantesConfirmados({ eventoId: id, participante: participante }))}
-                    id="campo-participante"
+                    onChange={() => {
+                      if (eventoId) {
+                        dispatch(atualizarParticipantesConfirmados({
+                          eventoId: eventoId,
+                          participante: participante
+                        }));
+                      }
+                    }}
+                    id={`campo-participante-${participante.id}`}
                     type="checkbox"
                   />
-                  <label className={styles['campo-participante-final']} htmlFor="campo-participante" />
+                  <label
+                    className={styles['campo-participante-final']}
+                    htmlFor={`campo-participante-${participante.id}`}
+                  />
                 </div>
 
                 <span>{participante.nome}</span>
@@ -56,8 +66,8 @@ const PaginaEvento: React.FC = () => {
           );
         })}
       </ul>
-    )
-  }
+    );
+  };
 
   return (
     <PaginaLayoutWrapper>
