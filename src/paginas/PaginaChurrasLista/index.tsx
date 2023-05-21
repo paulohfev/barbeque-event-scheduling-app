@@ -5,7 +5,6 @@ import ItemAgendado from '../../componentes/ItemAgendado';
 import PaginaLayoutWrapper from '../../layouts/PaginaLayoutWrapper';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { obterEventos, selecionarEventos } from '../../store/slices/eventosSlice';
-import { formatarRotaSlug } from '../../utilidades/rotas';
 import styles from './PaginaChurrascoLista.module.scss';
 
 const PaginaChurrasLista: React.FC = () => {

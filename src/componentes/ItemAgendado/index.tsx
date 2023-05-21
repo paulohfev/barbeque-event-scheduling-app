@@ -3,6 +3,7 @@ import { ReactComponent as IconeDinheiro } from '../../assets/icones/dinheiro-ic
 import { ReactComponent as IconeGrupo } from '../../assets/icones/grupo-icone.svg';
 import { formatarData, formatarParaMoeda } from '../../utilidades/conteudo';
 import styles from './ItemAgendado.module.scss';
+import ContagemTotal from '../ContagemTotal';
 
 type Props = {
   data: string;
@@ -20,15 +21,12 @@ const ItemAgendado: React.FC<Props> = ({ data, titulo, numeroParticipantes, valo
       </div>
 
       <div className={styles['footer-item-agendado']}>
-        <div className={styles['footer-grupo']}>
-          <IconeGrupo />
-          <p className={styles['footer-texto']}>{numeroParticipantes}</p>
-        </div>
+        <ContagemTotal icone={<IconeGrupo />} valor={numeroParticipantes}/>
 
-        <div className={styles['footer-grupo']}>
-          <IconeDinheiro />
-          <p className={styles['footer-texto']}>{formatarParaMoeda(valorTotalParticipantes.toString())}</p>
-        </div>
+        <ContagemTotal
+          icone={<IconeDinheiro />}
+          valor={formatarParaMoeda(valorTotalParticipantes.toString())}
+        /> 
       </div>
     </div>
   )
