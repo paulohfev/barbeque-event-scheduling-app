@@ -1,5 +1,4 @@
-.container {
-  display: flex;
+.grid-container {
   justify-content: center;
 }
 
@@ -16,7 +15,7 @@
   flex-direction: column;
   height: 192px;
   justify-content: center;
-  width: 282px;
+  width: 100%;
 
   .botao-icone-wrapper {
     background-color: var(--amarelo-primario);
