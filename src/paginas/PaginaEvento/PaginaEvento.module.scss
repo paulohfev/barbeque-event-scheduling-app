@@ -1,5 +1,6 @@
 .container {
   background-color: var(--branco-primario);
+  border-radius: 2px;
   padding: 21px 24px 46px;
 
   .header {
@@ -82,5 +83,38 @@
   .campo-participante:checked + .campo-participante-final {
     background-color: var(--amarelo-primario);
     border: 1px solid var(--amarelo-primario);
+  }
+}
+
+.botao-editar {
+  background-color: var(--branco-primario);
+  border: 0;
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 25px;
+  margin: 25px;
+  padding: 5px 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.modal-container {
+  background-color: var(--branco-primario);
+  border-radius: 2px;
+  left: 0; 
+  margin-left: auto; 
+  margin-right: auto; 
+  padding: 21px 24px;
+  position: absolute;
+  right: 0; 
+  top: 50px;
+  max-width: 926px;
+}
+
+@media screen and (max-width: 974px) {
+  .modal-container {
+    margin-left: 24px;
+    margin-right: 24px;
   }
 }
