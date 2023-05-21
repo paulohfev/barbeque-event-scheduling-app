@@ -9,16 +9,18 @@ import { formatarParaMoeda } from '../../utilidades/conteudo';
 import { useAppDispatch } from '../../store/hooks';
 import { adicionarEventos } from '../../store/slices/eventosSlice';
 import styles from './PaginaCriarEvento.module.scss';
+import { Grid } from '@mui/material';
 
 const PaginaCriarEvento: React.FC = () => {
   const dispatch = useAppDispatch();
-  const [valorTitutlo, setValorTitulo] = useState('');
+  const [valorTitulo, setValorTitulo] = useState('');
   const [valorData, setValorData] = useState(new Date());
   const [valorParticipante, setValorParticipante] = useState('');
   const [valorDinheiroParticipante, setValorDinheiroParticipante] = useState('');
   const [participantes, setParticipantes] = useState<Participante[]>([]);
-
   const navigate = useNavigate();
+
+  const camposEstaoPreenchidos = (valorTitulo !== '') && participantes.length !== 0;
 
   const adicionarItemLista = () => {
     const itemParticipante = {
@@ -62,7 +64,7 @@ const PaginaCriarEvento: React.FC = () => {
     dispatch(adicionarEventos({
       id: uniqueId(),
       data: valorData.toString(),
-      titulo: valorTitutlo,
+      titulo: valorTitulo,
       participantes: participantes,
     }));
     navigate('/');
@@ -70,46 +72,50 @@ const PaginaCriarEvento: React.FC = () => {
 
   return (
     <PaginaLayoutWrapper>
-      <div className={styles['container']}>
-        <form className={styles['formulario']} onSubmit={(e) => enviarFormulario(e)}>
-          <label className={styles['rotulo']}>Data</label>
-          <DatePicker className={styles['campo']} selected={valorData} onChange={(data: Date) => setValorData(data)} />
+      <Grid container>
+        <Grid item xs={12} lg={10} className={styles['grid-item']}>
+          <div className={styles['container']}>
+            <form className={styles['formulario']} onSubmit={(e) => enviarFormulario(e)}>
+              <label className={styles['rotulo']}>Data</label>
+              <DatePicker className={styles['campo']} selected={valorData} onChange={(data: Date) => setValorData(data)} />
 
-          <label className={styles['rotulo']}>Título</label>
-          <input
-            className={styles['campo']}
-            onChange={(e) => setValorTitulo(e.target.value)}
-            placeholder="Título"
-            type="text"
-            value={valorTitutlo}
-          />
+              <label className={styles['rotulo']}>Título</label>
+              <input
+                className={styles['campo']}
+                onChange={(e) => setValorTitulo(e.target.value)}
+                placeholder="Título"
+                type="text"
+                value={valorTitulo}
+              />
 
-          <label className={styles['rotulo']}>Participantes</label>
-          <div className={styles['container-campo-participantes']}>
-            <input
-              className={classNames(styles['campo'], styles['campo-participantes'])}
-              onChange={(e) => setValorParticipante(e.target.value)}
-              placeholder="Adicionar Participante"
-              type="text"
-              value={valorParticipante}
-            />
-            <input
-              className={classNames(styles['campo'], styles['campo-participantes'])}
-              onChange={(e) => setValorDinheiroParticipante(e.target.value)}
-              placeholder="0"
-              type="number"
-              value={valorDinheiroParticipante}
-            />
-            <span className={styles['adicionar-participante']} onClick={() => adicionarItemLista()}>+</span>
+              <label className={styles['rotulo']}>Participantes</label>
+              <div className={styles['container-campo-participantes']}>
+                <input
+                  className={classNames(styles['campo'], styles['campo-participantes'])}
+                  onChange={(e) => setValorParticipante(e.target.value)}
+                  placeholder="Adicionar Participante"
+                  type="text"
+                  value={valorParticipante}
+                />
+                <input
+                  className={classNames(styles['campo'], styles['campo-participantes'])}
+                  onChange={(e) => setValorDinheiroParticipante(e.target.value)}
+                  placeholder="0"
+                  type="number"
+                  value={valorDinheiroParticipante}
+                />
+                <span className={styles['adicionar-participante']} onClick={() => adicionarItemLista()}>+</span>
+              </div>
+
+              <div className={styles['lista-participantes-adicionados']}>
+                {renderizarParticipantesAdicionados()}
+              </div>
+
+              <button className={styles['botao-envio']} disabled={!camposEstaoPreenchidos} type="submit">Adicionar Evento</button>
+            </form>
           </div>
-
-          <div className={styles['lista-participantes-adicionados']}>
-            {renderizarParticipantesAdicionados()}
-          </div>
-
-          <button className={styles['botao-envio']} type="submit">Adicionar Evento</button>
-        </form>
-      </div>
+        </Grid>
+      </Grid>
     </PaginaLayoutWrapper>
   )
 };
