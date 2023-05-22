@@ -14,6 +14,7 @@ type Props = {
   setValorDinheiroParticipante: (T: string) => void;
   setValorParticipante: (T: string) => void;
   setValorTitulo: (T: string) => void;
+  textoBotaoEnvio: string;
   valorData: Date;
   valorDinheiroParticipante: string;
   valorParticipante: string;
@@ -28,6 +29,7 @@ const FormularioEvento: React.FC<Props> = ({
   setValorDinheiroParticipante,
   setValorParticipante,
   setValorTitulo,
+  textoBotaoEnvio,
   valorData,
   valorDinheiroParticipante,
   valorParticipante,
@@ -109,7 +111,9 @@ const FormularioEvento: React.FC<Props> = ({
         {renderizarParticipantesAdicionados()}
       </div>
 
-      <button className={styles['botao-envio']} disabled={!camposEstaoPreenchidos} type="submit">Adicionar Evento</button>
+      <button className={styles['botao-envio']} disabled={!camposEstaoPreenchidos} type="submit">
+        {textoBotaoEnvio}
+      </button>
     </form>
   )
 };

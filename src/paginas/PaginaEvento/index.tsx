@@ -103,6 +103,7 @@ const PaginaEvento: React.FC = () => {
             setValorDinheiroParticipante={setValorDinheiroParticipante}
             setValorParticipante={setValorParticipante}
             setValorTitulo={setValorTitulo}
+            textoBotaoEnvio="Atualizar Evento"
             valorData={valorData}
             valorDinheiroParticipante={valorDinheiroParticipante}
             valorParticipante={valorParticipante}
