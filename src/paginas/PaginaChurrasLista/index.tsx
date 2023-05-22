@@ -32,7 +32,7 @@ const PaginaChurrasLista: React.FC = () => {
       }
 
       return (
-        <Grid item xs={12} md={4} lg={4} key={evento.id}>
+        <Grid item xs={12} md={4} lg={4} key={evento.id} className={styles['grid-item']}>
           <Link
             className={styles['evento-link']}
             to={`/evento/${evento.id}`}

@@ -1,5 +1,13 @@
 .grid-container {
   justify-content: center;
+
+  .grid-item:hover {
+    .evento-link {
+      .deletar-evento {
+        display: initial;
+      }
+    }
+  }
 }
 
 .link {
@@ -43,6 +51,7 @@
     border: 0;
     color: var(--vermelho-primario);
     cursor: pointer;
+    display: none;
     font-weight: 700;
     margin: 5px;
     position: absolute;
