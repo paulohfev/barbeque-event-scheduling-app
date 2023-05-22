@@ -19,6 +19,14 @@ export const eventosSlice = createSlice({
     removerEvento: (state, action: PayloadAction<string>) => {
       return state.filter((evento) => evento.id !== action.payload);
     },
+    atualizarEvento: (state, action: PayloadAction<Evento>) => {
+      return state.map((evento) => {
+        if (evento.id === action.payload.id) {
+          return { ...evento, ...action.payload }
+        }
+        return evento
+      })
+    },
     atualizarParticipantesConfirmados: (state, action: PayloadAction<{eventoId: string, participante: Participante}>) => {
       const { eventoId, participante } = action.payload;
       return state.map((evento) => {
@@ -41,7 +49,13 @@ export const eventosSlice = createSlice({
   },
 });
 
-export const { obterEventos, adicionarEventos, atualizarParticipantesConfirmados, removerEvento } = eventosSlice.actions;
+export const {
+  obterEventos,
+  adicionarEventos,
+  atualizarParticipantesConfirmados,
+  removerEvento,
+  atualizarEvento,
+} = eventosSlice.actions;
 
 export const selecionarEventos = (state: RootState) => state.eventos;
 
